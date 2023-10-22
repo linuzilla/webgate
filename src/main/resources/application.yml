@@ -1,0 +1,78 @@
+server:
+  port: 3000
+  forward-headers-strategy: native
+  servlet:
+    session:
+      timeout: 10800
+      cookie:
+        name: WEBGATE
+
+spring:
+  profiles:
+    active: dev
+  #  codec:
+  #    max-in-memory-size: 20MB
+  application:
+    name: webgate
+#  session:
+    # store-type: none
+#    store-type: redis
+#    redis:
+#      flush-mode: on_save
+#      namespace: sp:sess
+#    timeout: 10h
+#  redis:
+#    database: 0
+#    host: 127.0.0.1
+#    port: 6379
+#    timeout: 600
+  thymeleaf:
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+
+
+application:
+  scheduler: 8
+  declare:
+    production: false
+    alternate-url: https://latte.dd.ncu.edu.tw
+  mail:
+    mail-from: latte@cloud.ncu.edu.tw
+    mail-from-name: Latte 服務
+    smtp:
+      auth: false
+      starttls: false
+      host: mailx.cloud.ncu.edu.tw
+      port: 25
+  local-user:
+    users:
+      - username: admin
+        password: "password_encrypted_with_bcrypt"
+        roles:
+          - ADMIN
+        allowed-from:
+          - 127.0.0.1
+          - 0:0:0:0:0:0:0:1
+        skip-captcha: true
+  special-user:
+
+  proxy:
+    default-redirection: https://default-redirection.address
+    user-agent: "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0 EdgiOS/45.11.11 Mobile/15E148 Safari/605.1.15"
+
+    hosts:
+      latte_dd_ncu_edu_tw:
+        target: https://cis.ncu.edu.tw/
+        host-header: cis.ncu.edu.tw
+        pause-login-on-redirect-to: https://portal.ncu.edu.tw/endpoint
+        text-replacements:
+          - - "cis.ncu.edu.tw"
+            - "latte.dd.ncu.edu.tw"
+      espresso_dd_ncu_edu_tw:
+        target: https://cis-devel.cc.ncu.edu.tw/
+        host-header: cis-devel.cc.ncu.edu.tw
+        pause-login-on-redirect-to: https://portal.ncu.edu.tw/endpoint
+        text-replacements:
+          - - "cis-devel.cc.ncu.edu.tw"
+            - "espresso.dd.ncu.edu.tw"

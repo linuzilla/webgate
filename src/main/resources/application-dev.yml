@@ -1,0 +1,8 @@
+
+
+logging:
+  pattern:
+    console: '%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%10.10t]){faint} %clr(%-40.40logger{39}):%clr(%4line){cyan}%clr(:){faint} %m%n'
+  level:
+    root: INFO
+    "ncu.mac.webgate.service": DEBUG
